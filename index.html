@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changes AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-texture"></div>
+<div class="bg-overlay"></div>
+
+<div class="page">
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Changes AI</div>
+    <div class="version">v0.1</div>
+  </nav>
+
+  <!-- PROBLEM -->
+  <section class="problem">
+    <div class="section-label">/ The Problem</div>
+    <h1>The window between<br/>disclosure and<br/>weaponisation has<br/><em>collapsed.</em></h1>
+    <p>Anthropic's Project Glasswing revealed that Claude Mythos Preview autonomously found thousands of zero-days across every major OS and browser — including a 27-year-old remote crash in OpenBSD that survived decades of human review and millions of fuzzer runs. Similar capabilities will arrive from other labs. They won't all be aimed at defence.</p>
+    <p>The defensive side hasn't kept up. Finding a CVE is fast. Deciding what to do about it in your codebase, without breaking production, still takes senior engineers hours — or days — per incident.</p>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution">
+    <div class="section-label">/ The Solution</div>
+    <h2>Changes AI collapses<br/>that middle step.</h2>
+    <p>Given a repo or a current venv, it produces a ranked set of remediation paths — each scored for exposure risk (how long you stay vulnerable) and breakage risk (how likely the upgrade is to break your application).</p>
+    <div class="irony">Yes, AI is what's making this necessary. Yes, AI is what Changes AI uses to help fix it. Irony noted and embraced.</div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="section-label">/ How It Works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Point it at a repo or venv</div>
+          <div class="step-desc">GitHub URL or local site-packages path</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Get a full version map</div>
+          <div class="step-desc">Every package — pinned, outdated, unknown — in one table</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">CVE scanning with severity flags</div>
+          <div class="step-desc">Severity-aware output, CI-ready exit codes via OSV</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">LLM-backed impact assessment</div>
+          <div class="step-desc">Ranked remediation paths scored for exposure risk and breakage risk</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE OUTPUT -->
+  <section>
+    <div class="section-label">/ Sample Output</div>
+    <div class="output-grid">
+
+      <!-- Version map -->
+      <div class="output-block">
+        <h4>Version Map</h4>
+        <div class="terminal">
+          <div class="terminal-dots">● ● ●</div>
+          <span class="t-prompt">$</span> <span class="t-cmd">python changes-ai.py \</span><br/>
+          <span class="t-cmd">&nbsp;&nbsp;--url github.com/psf/requests</span><br/>
+          <br/>
+          <span class="t-dim">Analysing: psf/requests</span><br/>
+          <span class="t-dim">Packages detected: 5</span><br/>
+          <br/>
+          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current&nbsp;&nbsp;Latest&nbsp;&nbsp;Status</span><br/>
+          <span class="t-rule">───────────────────────────────────</span><br/>
+          <span class="t-pkg">certifi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2024.2.2&nbsp;2024.2.2&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
+          <span class="t-pkg">urllib3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1&nbsp;&nbsp;&nbsp;&nbsp;2.3.0&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">pillow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9.5.0&nbsp;&nbsp;&nbsp;&nbsp;10.3.0&nbsp;&nbsp;&nbsp;</span><span class="t-cve">✗ CVE-2024-28219</span><br/>
+          <span class="t-pkg">charset-n&nbsp;&nbsp;&nbsp;3.3.2&nbsp;&nbsp;&nbsp;&nbsp;3.3.2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
+          <br/>
+          <span class="t-summary">Outdated: 1 · CVEs: 1 · OK: 3</span>
+        </div>
+      </div>
+
+      <!-- Dependency chart -->
+      <div class="output-block">
+        <h4>Dependency Chart</h4>
+        <div class="terminal">
+          <div class="terminal-dots">● ● ●</div>
+          <span class="t-prompt">$</span> <span class="t-cmd">python changes-ai.py \</span><br/>
+          <span class="t-cmd">&nbsp;&nbsp;--url github.com/psf/requests \</span><br/>
+          <span class="t-cmd">&nbsp;&nbsp;--chart</span><br/>
+          <br/>
+          <span class="t-blue">```mermaid</span><br/>
+          <span class="t-head">graph TD</span><br/>
+          <span class="t-pkg">&nbsp;&nbsp;requests --> urllib3</span><br/>
+          <span class="t-pkg">&nbsp;&nbsp;requests --> certifi</span><br/>
+          <span class="t-pkg">&nbsp;&nbsp;requests --> pillow</span><br/>
+          <span class="t-pkg">&nbsp;&nbsp;requests --> idna</span><br/>
+          <span class="t-warn">&nbsp;&nbsp;urllib3[urllib3 ⚠]</span><br/>
+          <span class="t-cve">&nbsp;&nbsp;pillow[pillow ✗ CVE]</span><br/>
+          <span class="t-blue">```</span><br/>
+          <br/>
+          <span class="t-dim">Chart written to deps.mmd</span>
+        </div>
+
+        <div class="chart-rendered">
+          <div class="chart-rendered-label">Rendered</div>
+          <div class="chart-tree">
+            <div class="node">requests</div>
+            <div class="node-row">
+              <div class="node-col">
+                <div class="connector-v"></div>
+                <div class="node">certifi</div>
+              </div>
+              <div class="node-col">
+                <div class="connector-v"></div>
+                <div class="node warn">urllib3 ⚠</div>
+              </div>
+              <div class="node-col">
+                <div class="connector-v"></div>
+                <div class="node cve">pillow ✗ CVE</div>
+              </div>
+              <div class="node-col">
+                <div class="connector-v"></div>
+                <div class="node">idna</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-l">changesai.pro</div>
+    <div class="footer-r">© 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
