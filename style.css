@@ -55,7 +55,7 @@ nav {
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 900;
   letter-spacing: 5px;
   text-transform: uppercase;
@@ -63,16 +63,16 @@ nav {
 }
 
 .version {
-  font-size: 10px;
-  color: rgba(255,255,255,0.2);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
   letter-spacing: 3px;
   text-transform: uppercase;
 }
 
 /* ── SECTIONS ── */
 section {
-  padding: 64px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
+  padding: 56px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.20);
 }
 
 .section-label {
@@ -119,7 +119,7 @@ section {
   letter-spacing: 0px;
   line-height: 1.1;
   color: #fff;
-  max-width: 820px;
+  max-width: 960px;
   margin-bottom: 24px;
 }
 
@@ -157,14 +157,15 @@ section {
   gap: 28px;
   align-items: flex-start;
   padding: 20px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .step:last-child { border-bottom: none; }
 
 .step-num {
   font-size: 14px;
-  color: rgba(255,255,255,0.4);
+  color: #e8351a;
+  -webkit-text-fill-color: #e8351a;
   min-width: 28px;
   padding-top: 2px;
   letter-spacing: 1px;
@@ -226,10 +227,10 @@ section {
 
 .t-prompt { color: rgba(255,255,255,0.35); }
 .t-cmd    { color: #fff; }
-.t-dim    { color: rgba(255,255,255,0.2); }
-.t-head   { color: rgba(255,255,255,0.6); }
-.t-rule   { color: rgba(255,255,255,0.1); }
-.t-pkg    { color: rgba(255,255,255,0.72); }
+.t-dim    { color: rgba(255,255,255,0.5); }
+.t-head   { color: rgba(255,255,255,0.8); }
+.t-rule   { color: rgba(255,255,255,0.2); }
+.t-pkg    { color: rgba(255,255,255,0.9); }
 .t-ok     { color: rgba(255,255,255,0.9); }
 .t-warn   { color: rgba(255,255,255,0.6); }
 .t-cve    { color: #fff;}
@@ -307,10 +308,10 @@ footer {
 }
 
 .footer-l, .footer-r {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.3);
 }
 
 /* ── MOBILE ── */

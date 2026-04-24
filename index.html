@@ -16,7 +16,7 @@
   <!-- NAV -->
   <nav>
     <div class="logo"><span class="brand">Changes AI</span></div>
-    <div class="version">v0.1</div>
+    <div class="version">v1.0</div>
   </nav>
 
   <!-- PROBLEM -->
@@ -71,10 +71,16 @@
         <div class="step-num">05</div>
         <div>
           <div class="step-title">LLM-backed impact assessment</div>
-          <div class="step-desc">Ranked remediation paths scored for exposure risk and breakage risk</div>
+          <div class="step-desc">Structured impact report including changes that intersect usage, risks, confidence level, and cited evidence.</div>
         </div>
       </div>
-    </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div>
+          <div class="step-title">Remediation Planner</div>
+          <div class="step-desc">Ranked list of remediation paths scored based on exposure and breakage risk</div>
+        </div>
+      </div>
   </section>
 
   <!-- SAMPLE OUTPUT -->
@@ -167,30 +173,32 @@
         </div>
       </div>
 
-      <!-- Usage Analysis 2 -->
+      <!-- Impact Analysis -->
       <div class="output-block">
         <h4>Impact Analysis</h4>
         <div class="terminal">
           <div class="terminal-dots">● ● ●</div>
-          <span class="t-head">=== Usage Analysis ===</span><br/>
+          <span class="t-head">=== Impact Analysis ===</span><br/>
           <br/>
-          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symbols used</span><br/>
-          <span class="t-rule">────────────────────────────────────────────────────────────────────────────────────</span><br/>
-          <span class="t-pkg">PyGithub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Github, GithubException, UnknownObjectException</span><br/>
-          <span class="t-pkg">PyYAML&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yaml</span><br/>
-          <span class="t-pkg">aiofiles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aiofiles</span><br/>
-          <span class="t-pkg">click&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;click</span><br/>
-          <span class="t-pkg">croniter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;croniter</span><br/>
-          <span class="t-pkg">defusedxml&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ET</span><br/>
-          <span class="t-pkg">sqlcipher3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sqlcipher3, sqlite3</span><br/>
-          <span class="t-pkg">openai&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AsyncOpenAI, ChatCompletionMessageParam</span><br/>
-          <span class="t-pkg">httpx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_httpx, httpx</span><br/>
-          <span class="t-pkg">huggingface_hub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hf_hub_download</span><br/>
-          <span class="t-pkg">keyring&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyring</span><br/>
-          <span class="t-pkg">mcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClientSession, OAuthClientInformationFull</span><br/>
-          <span class="t-pkg">numpy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np</span><br/>
-          <span class="t-pkg">pillow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image, ImageEnhance</span><br/>
-          <span class="t-pkg">pandas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pd</span><br/>
+          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Upgrade&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Risk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confidence</span><br/>
+          <span class="t-rule">────────────────────────────────────────────────────────────────────────</span><br/>
+          <span class="t-pkg">flask&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2 → 3.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;patch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-dim">○ LOW (0.05)&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ HIGH</span><br/>
+          <span class="t-dim">The CVE record shows versions &lt;3.1.3 are affected and 3.1.3 is the fixed release. Moving</span>
+          <span class="t-dim">from 3.1.2 to 3.1.3 is a patch-level update focused on security/bug fixes; no API</span>
+          <span class="t-dim">removals or signature changes are documented.</span><br>
+          <span class="t-dim"> The project's used symbols (Flask, jsonify, render_template, request, send_from_directory) are stable across patch releases.</span><br/>
+          <br/>
+          <span class="t-pkg">requests&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.32.5 → 2.33.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-dim">○ LOW (0.15)&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ HIGH</span><br/>
+          <span class="t-dim">The release 2.33.0 is marked as fixing GHSA-gc5v-m9x4-r6x2 and is a minor version bump</span>
+          <span class="t-dim">from 2.32.5. No project symbols use requests, so there is no direct usage surface that</span>
+          <span class="t-dim">could be impacted by internal API changes.</span><br/>
+          <br/>
+          <span class="t-pkg">urllib3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.5.0 → 2.6.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-dim">○ LOW (0.08)&nbsp;&nbsp;&nbsp;</span><span class="t-warn">~ MEDIUM</span><br/>
+          <span class="t-dim">Upgrading from 2.5.0 to 2.6.0 is a minor release that fixes multiple HIGH severity CVEs</span>
+          <span class="t-dim">(GHSA-2xpw-w6gg-jr37 and GHSA-gm62-xv2j-4w53 are fixed in 2.6.0). One listed</span>
+          <span class="t-dim">vulnerability (GHSA-38jv-5279-wg99) is fixed in 2.6.3,</span><br>
+          <span class="t-dim">so 2.6.0 will not remediate that issue. No project usage symbols were provided, so the risk of breaking consumer code is</span>
+          <span class="t-dim">judged low but not zero.</span><br/>
         </div>
       </div>
 
