@@ -22,15 +22,15 @@
   <!-- PROBLEM -->
   <section class="problem">
     <div class="section-label">/ The Problem</div>
-    <h1>The window between<br/>disclosure and<br/>weaponisation has<br/><em>collapsed.</em></h1>
+    <h1>The window between disclosure and<br/>weaponisation has <em>collapsed.</em></h1>
     <p>Anthropic's Project Glasswing revealed that Claude Mythos Preview autonomously found thousands of zero-days across every major OS and browser — including a 27-year-old remote crash in OpenBSD that survived decades of human review and millions of fuzzer runs. Similar capabilities will arrive from other labs. They won't all be aimed at defence.</p>
-    <p>The defensive side hasn't kept up. Finding a CVE is fast. Deciding what to do about it in your codebase, without breaking production, still takes senior engineers hours — or days — per incident.</p>
+    <p>The defensive side hasn't kept up. Finding a CVE is fast. Deciding what to do about it in your codebase, without breaking production, still takes senior engineers hours, or often days, per incident.</p>
   </section>
 
   <!-- SOLUTION -->
   <section class="solution">
     <div class="section-label">/ The Solution</div>
-    <h2><span class="brand">Changes AI</span> collapses<br/>that middle step.</h2>
+    <h2><span class="brand">Changes AI</span> slashes the time to <em>remediate.</em></h2>
     <p>Given a repo or a source folder, it produces a ranked set of remediation paths — each scored for exposure risk (how long you stay vulnerable) and breakage risk (how likely the upgrade is to break your application).</p>
     <div class="irony">Yes, AI is what's making this necessary. Yes, AI is what Changes AI uses to help fix it. Irony noted and embraced.</div>
   </section>
@@ -84,74 +84,116 @@
 
       <!-- Version map -->
       <div class="output-block">
-        <h4>Version Map</h4>
+        <h4>Version Mapping</h4>
         <div class="terminal">
           <div class="terminal-dots">● ● ●</div>
-          <span class="t-prompt">$</span> <span class="t-cmd">python changes-ai.py \</span><br/>
-          <span class="t-cmd">&nbsp;&nbsp;--url github.com/psf/requests</span><br/>
+          <span class="t-head">=== Version Mapping ===</span><br/>
           <br/>
-          <span class="t-dim">Analysing: psf/requests</span><br/>
-          <span class="t-dim">Packages detected: 5</span><br/>
+          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installed&nbsp;&nbsp;&nbsp;Requirement&nbsp;&nbsp;Latest&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status</span><br/>
+          <span class="t-rule">────────────────────────────────────────────────────────────────────────────────────</span><br/>
+          <span class="t-pkg">openai&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.6.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unpinned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.32.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">python-dotenv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unpinned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">PyYAML&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.0.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unpinned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.0.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
+          <span class="t-pkg">pyoslog&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unpinned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
+          <span class="t-pkg">bandit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.8.6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=1.7.5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.9.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">flask&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=3.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">flask-cors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.0.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=4.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.0.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">flask-socketio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=5.3.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.6.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">python-socketio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.14.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=5.11.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.16.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">sphinx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.2.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=7.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9.1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">sphinx-rtd-theme&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.0.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=1.3.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">sphinx-autodoc-typehints&nbsp;&nbsp;&nbsp;&nbsp;3.5.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=1.24.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.10.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">myst-parser&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.0.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=2.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
+          <span class="t-pkg">breathe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.36.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=4.35.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.36.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
+          <span class="t-pkg">sphinxcontrib-mermaid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;=0.9.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.0.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
           <br/>
-          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current&nbsp;&nbsp;Latest&nbsp;&nbsp;Status</span><br/>
-          <span class="t-rule">───────────────────────────────────</span><br/>
-          <span class="t-pkg">certifi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2024.2.2&nbsp;2024.2.2&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
-          <span class="t-pkg">urllib3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1&nbsp;&nbsp;&nbsp;&nbsp;2.3.0&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-warn">⚠ outdated</span><br/>
-          <span class="t-pkg">pillow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9.5.0&nbsp;&nbsp;&nbsp;&nbsp;10.3.0&nbsp;&nbsp;&nbsp;</span><span class="t-cve">✗ CVE-2024-28219</span><br/>
-          <span class="t-pkg">charset-n&nbsp;&nbsp;&nbsp;3.3.2&nbsp;&nbsp;&nbsp;&nbsp;3.3.2&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-ok">✓ up-to-date</span><br/>
-          <br/>
-          <span class="t-summary">Outdated: 1 · CVEs: 1 · OK: 3</span>
+          <span class="t-summary">Outdated: 12 · OK: 3</span>
         </div>
       </div>
 
-      <!-- Dependency chart -->
+      <!-- CVE Scan -->
       <div class="output-block">
-        <h4>Dependency Chart</h4>
+        <h4>CVE Scan</h4>
         <div class="terminal">
           <div class="terminal-dots">● ● ●</div>
-          <span class="t-prompt">$</span> <span class="t-cmd">python changes-ai.py \</span><br/>
-          <span class="t-cmd">&nbsp;&nbsp;--url github.com/psf/requests \</span><br/>
-          <span class="t-cmd">&nbsp;&nbsp;--chart</span><br/>
+          <span class="t-head">=== CVE Scan (LOW+) ===</span><br/>
           <br/>
-          <span class="t-blue">```mermaid</span><br/>
-          <span class="t-head">graph TD</span><br/>
-          <span class="t-pkg">&nbsp;&nbsp;requests --> urllib3</span><br/>
-          <span class="t-pkg">&nbsp;&nbsp;requests --> certifi</span><br/>
-          <span class="t-pkg">&nbsp;&nbsp;requests --> pillow</span><br/>
-          <span class="t-pkg">&nbsp;&nbsp;requests --> idna</span><br/>
-          <span class="t-warn">&nbsp;&nbsp;urllib3[urllib3 ⚠]</span><br/>
-          <span class="t-cve">&nbsp;&nbsp;pillow[pillow ✗ CVE]</span><br/>
-          <span class="t-blue">```</span><br/>
+          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installed&nbsp;CVE / ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed In</span><br/>
+          <span class="t-rule">────────────────────────────────────────────────────────────────────────────</span><br/>
+          <span class="t-pkg">urllib3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-2xpw-w6gg-jr37&nbsp;&nbsp;&nbsp;</span><span class="t-cve">⚠ HIGH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">2.6.0</span><br/>
+          <span class="t-pkg">urllib3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-38jv-5279-wg99&nbsp;&nbsp;&nbsp;</span><span class="t-cve">⚠ HIGH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">2.6.3</span><br/>
+          <span class="t-pkg">urllib3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-gm62-xv2j-4w53&nbsp;&nbsp;&nbsp;</span><span class="t-cve">⚠ HIGH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">2.6.0</span><br/>
+          <span class="t-pkg">black&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25.9.0&nbsp;&nbsp;&nbsp;&nbsp;GHSA-3936-cmfr-pm3m&nbsp;&nbsp;&nbsp;</span><span class="t-cve">⚠ HIGH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">26.3.1</span><br/>
+          <span class="t-pkg">python-dotenv&nbsp;&nbsp;&nbsp;1.2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-mf9w-mj56-hr94&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">1.2.2</span><br/>
+          <span class="t-pkg">requests&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.32.5&nbsp;&nbsp;&nbsp;&nbsp;GHSA-gc5v-m9x4-r6x2&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">2.33.0</span><br/>
+          <span class="t-pkg">Werkzeug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-29vq-49wr-vm6x&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">3.1.6</span><br/>
+          <span class="t-pkg">Werkzeug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-87hc-h4r5-73f7&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">3.1.5</span><br/>
+          <span class="t-pkg">Werkzeug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-hgf8-39gv-g3f2&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">3.1.4</span><br/>
+          <span class="t-pkg">pytest&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.4.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-6w46-j5rx-g56g&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">9.0.3</span><br/>
+          <span class="t-pkg">filelock&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.20.0&nbsp;&nbsp;&nbsp;&nbsp;GHSA-qmgc-5h2g-mvrw&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">3.20.3</span><br/>
+          <span class="t-pkg">filelock&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.20.0&nbsp;&nbsp;&nbsp;&nbsp;GHSA-w853-jp5j-5j7f&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">3.20.1</span><br/>
+          <span class="t-pkg">virtualenv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20.35.4&nbsp;&nbsp;&nbsp;GHSA-597g-3phw-6986&nbsp;&nbsp;&nbsp;</span><span class="t-warn">● MEDIUM&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">20.36.1</span><br/>
+          <span class="t-pkg">flask&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GHSA-68rp-wp8r-4726&nbsp;&nbsp;&nbsp;</span><span class="t-dim">○ LOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">3.1.3</span><br/>
+          <span class="t-pkg">Pygments&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.19.2&nbsp;&nbsp;&nbsp;&nbsp;GHSA-5239-wwwm-4pmq&nbsp;&nbsp;&nbsp;</span><span class="t-dim">○ LOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="t-pkg">2.20.0</span><br/>
           <br/>
-          <span class="t-dim">Chart written to deps.mmd</span>
+          <span class="t-summary">HIGH: 4 · MEDIUM: 9 · LOW: 2</span>
         </div>
-
-        <div class="chart-rendered">
-          <div class="chart-rendered-label">Rendered</div>
-          <div class="chart-tree">
-            <div class="node">requests</div>
-            <div class="node-row">
-              <div class="node-col">
-                <div class="connector-v"></div>
-                <div class="node">certifi</div>
-              </div>
-              <div class="node-col">
-                <div class="connector-v"></div>
-                <div class="node warn">urllib3 ⚠</div>
-              </div>
-              <div class="node-col">
-                <div class="connector-v"></div>
-                <div class="node cve">pillow ✗ CVE</div>
-              </div>
-              <div class="node-col">
-                <div class="connector-v"></div>
-                <div class="node">idna</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <!-- Usage Analysis 1 -->
+      <div class="output-block">
+        <h4>Usage Analysis</h4>
+        <div class="terminal">
+          <div class="terminal-dots">● ● ●</div>
+          <span class="t-head">=== Usage Analysis ===</span><br/>
+          <br/>
+          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symbols used</span><br/>
+          <span class="t-rule">────────────────────────────────────────────────────────────────────────────────────</span><br/>
+          <span class="t-pkg">PyGithub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Github, GithubException, UnknownObjectException</span><br/>
+          <span class="t-pkg">PyYAML&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yaml</span><br/>
+          <span class="t-pkg">aiofiles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aiofiles</span><br/>
+          <span class="t-pkg">click&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;click</span><br/>
+          <span class="t-pkg">croniter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;croniter</span><br/>
+          <span class="t-pkg">defusedxml&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ET</span><br/>
+          <span class="t-pkg">sqlcipher3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sqlcipher3, sqlite3</span><br/>
+          <span class="t-pkg">openai&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AsyncOpenAI, ChatCompletionMessageParam</span><br/>
+          <span class="t-pkg">httpx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_httpx, httpx</span><br/>
+          <span class="t-pkg">huggingface_hub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hf_hub_download</span><br/>
+          <span class="t-pkg">keyring&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyring</span><br/>
+          <span class="t-pkg">mcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClientSession, OAuthClientInformationFull</span><br/>
+          <span class="t-pkg">numpy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np</span><br/>
+          <span class="t-pkg">pillow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image, ImageEnhance</span><br/>
+          <span class="t-pkg">pandas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pd</span><br/>
+        </div>
+      </div>
+
+      <!-- Usage Analysis 2 -->
+      <div class="output-block">
+        <h4>Impact Analysis</h4>
+        <div class="terminal">
+          <div class="terminal-dots">● ● ●</div>
+          <span class="t-head">=== Usage Analysis ===</span><br/>
+          <br/>
+          <span class="t-head">Package&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Symbols used</span><br/>
+          <span class="t-rule">────────────────────────────────────────────────────────────────────────────────────</span><br/>
+          <span class="t-pkg">PyGithub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Github, GithubException, UnknownObjectException</span><br/>
+          <span class="t-pkg">PyYAML&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yaml</span><br/>
+          <span class="t-pkg">aiofiles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aiofiles</span><br/>
+          <span class="t-pkg">click&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;click</span><br/>
+          <span class="t-pkg">croniter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;croniter</span><br/>
+          <span class="t-pkg">defusedxml&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ET</span><br/>
+          <span class="t-pkg">sqlcipher3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sqlcipher3, sqlite3</span><br/>
+          <span class="t-pkg">openai&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AsyncOpenAI, ChatCompletionMessageParam</span><br/>
+          <span class="t-pkg">httpx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_httpx, httpx</span><br/>
+          <span class="t-pkg">huggingface_hub&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hf_hub_download</span><br/>
+          <span class="t-pkg">keyring&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyring</span><br/>
+          <span class="t-pkg">mcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClientSession, OAuthClientInformationFull</span><br/>
+          <span class="t-pkg">numpy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;np</span><br/>
+          <span class="t-pkg">pillow&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image, ImageEnhance</span><br/>
+          <span class="t-pkg">pandas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pd</span><br/>
+        </div>
+      </div>
+
     </div>
   </section>
 
