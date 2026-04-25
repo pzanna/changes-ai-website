@@ -190,7 +190,7 @@ section {
 /* ── OUTPUT ── */
 .output-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
@@ -203,7 +203,7 @@ section {
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.6);
   margin-bottom: 14px;
 }
 
@@ -212,7 +212,7 @@ section {
   background: rgba(0,0,0,0.72);
   border: 1px solid rgba(255,255,255,0.10);
   padding: 18px 20px;
-  font-size: 10.5px;
+  font-size: 14px;
   line-height: 1.95;
   font-family: 'Courier New', Courier, monospace;
   overflow: hidden;
@@ -234,7 +234,45 @@ section {
 .t-ok     { color: rgba(255,255,255,0.9); }
 .t-warn   { color: rgba(255,255,255,0.6); }
 .t-cve    { color: #fff;}
-.t-summary{ color: rgba(255,255,255,0.25); }
+.t-section {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.t-indent { display: block; padding-left: 1.5em; }
+
+.t-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: inherit;
+}
+
+.t-table th {
+  color: rgba(255,255,255,0.6);
+  text-align: left;
+  padding: 2px 16px 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+}
+
+.t-table td {
+  color: rgba(255,255,255,0.72);
+  padding: 3px 16px 3px 0;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.t-table td.t-note {
+  white-space: normal;
+  padding: 2px 0 10px 0;
+  line-height: 1.6;
+}
+
+.t-summary {
+  color: rgba(255,255,255,0.25);
+  margin-top: 12px;
+}
 .t-blue   { color: rgba(255,255,255,0.38); }
 
 /* ── MERMAID RENDERED ── */
