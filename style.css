@@ -21,9 +21,9 @@ body {
   background-image: url('images/owl.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.5;
+  opacity: 0.4;
   z-index: 0;
-  filter: grayscale(40%);
+  filter: grayscale(20%);
   animation: owl-fade-in 2s ease-out forwards;
 }
 
@@ -191,7 +191,7 @@ section {
 .output-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 28px;
 }
 
 .output-block {
@@ -200,17 +200,17 @@ section {
 }
 
 .output-block h4 {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.8);
   margin-bottom: 14px;
 }
 
 .terminal {
   flex: 1;
-  background: rgba(0,0,0,0.72);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(232, 53, 26, 0.5);
   padding: 18px 20px;
   font-size: 14px;
   line-height: 1.95;
