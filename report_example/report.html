@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Changes AI Remediation Report</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="cover">
+  <div class="navy-band">
+    <div class="brand">Changes AI</div>
+    <h1>Vulnerability<br>Remediation Report</h1>
+    <p class="subtitle">AI-assisted change-impact analysis for Python software dependencies.</p>
+  </div>
+  <div class="body">
+    <div class="meta-heading">Report Details</div>
+    <div class="metadata">
+      <table>
+        <tr><td class="label">Run ID</td><td class="value mono"><span class="run-id">33</span></td></tr>
+        <tr><td class="label">Target</td><td class="value mono">/path/to/sample/report</td></tr>
+        <tr><td class="label">Packages analysed</td><td class="value">15</td></tr>
+        <tr><td class="label">Vulnerabilities found</td><td class="value">17</td></tr>
+        <tr><td class="label">Remediation paths</td><td class="value">3</td></tr>
+        <tr><td class="label">Generated</td><td class="value"><span class="gen-date">26 April 2026 · 13:34 UTC</span></td></tr>
+      </table>
+    </div>
+    <div class="footer">
+      <span class="left">Confidential · Internal Use</span>
+            <span class="right">Changes AI - v0.6.2</span>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<h1>Executive Summary</h1>
+<div class="exec-summary">
+    <p>The dependency scan shows a moderate security exposure: four high-severity CVEs and ten medium-severity issues across 15 packages, with several high-impact fixes available for urllib3 and black that should be prioritized. Upgrading everything available yields the greatest reduction in exposure but carries a substantial probable breakage risk driven mainly by major-version bumps to pytest and pip; that path should only be attempted with comprehensive CI, canary releases, and staged rollouts. A balanced remediation path is the recommended near-term approach because it removes most medium/high CVEs while keeping probable breakage low to moderate. That path reduces exposure significantly with fewer disruptive upgrades, leaving the pip CVE that currently has no upstream fix as an outstanding issue. The most important remediation outcome is therefore twofold: apply the balanced upgrades now to remediate the bulk of vulnerabilities, and implement immediate runtime mitigations for the pip GHSA-58qw-9mgm-455v issue by restricting runtime pip operations, isolating build and packaging environments, and replacing automated pip usage where feasible. Also plan a separate, well-tested change window for higher-risk major upgrades such as pytest and pip, and close detection gaps (for example, the dynamic import of PyYAML) so future scans reliably surface usage. With these steps—balanced upgrades, targeted mitigations for no-fix CVEs, and staged testing of major bumps—the team can materially lower exposure while managing upgrade risk.</p>
+</div>
+
+<div class="section-rule"></div>
+<h2>Vulnerabilities by Severity</h2>
+<ul>
+<li>HIGH: 4</li>
+<li>MEDIUM: 10</li>
+<li>LOW: 3</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Package</th>
+<th>Installed</th>
+<th>ID</th>
+<th>Fixed In</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-HIGH">
+<td class="severity"><span class="pill sev-HIGH">HIGH</span></td>
+<td>black</td>
+<td>25.9.0</td>
+<td>GHSA-3936-cmfr-pm3m</td>
+<td>26.3.1</td>
+</tr>
+<tr class="row-HIGH">
+<td class="severity"><span class="pill sev-HIGH">HIGH</span></td>
+<td>urllib3</td>
+<td>2.5.0</td>
+<td>GHSA-2xpw-w6gg-jr37</td>
+<td>2.6.0</td>
+</tr>
+<tr class="row-HIGH">
+<td class="severity"><span class="pill sev-HIGH">HIGH</span></td>
+<td>urllib3</td>
+<td>2.5.0</td>
+<td>GHSA-38jv-5279-wg99</td>
+<td>2.6.3</td>
+</tr>
+<tr class="row-HIGH">
+<td class="severity"><span class="pill sev-HIGH">HIGH</span></td>
+<td>urllib3</td>
+<td>2.5.0</td>
+<td>GHSA-gm62-xv2j-4w53</td>
+<td>2.6.0</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>Werkzeug</td>
+<td>3.1.3</td>
+<td>GHSA-29vq-49wr-vm6x</td>
+<td>3.1.6</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>Werkzeug</td>
+<td>3.1.3</td>
+<td>GHSA-87hc-h4r5-73f7</td>
+<td>3.1.5</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>Werkzeug</td>
+<td>3.1.3</td>
+<td>GHSA-hgf8-39gv-g3f2</td>
+<td>3.1.4</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>filelock</td>
+<td>3.20.0</td>
+<td>GHSA-qmgc-5h2g-mvrw</td>
+<td>3.20.3</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>filelock</td>
+<td>3.20.0</td>
+<td>GHSA-w853-jp5j-5j7f</td>
+<td>3.20.1</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>pip</td>
+<td>25.3</td>
+<td>GHSA-58qw-9mgm-455v</td>
+<td>none known</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>pytest</td>
+<td>8.4.2</td>
+<td>GHSA-6w46-j5rx-g56g</td>
+<td>9.0.3</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>python-dotenv</td>
+<td>1.2.1</td>
+<td>GHSA-mf9w-mj56-hr94</td>
+<td>1.2.2</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>requests</td>
+<td>2.32.5</td>
+<td>GHSA-gc5v-m9x4-r6x2</td>
+<td>2.33.0</td>
+</tr>
+<tr class="row-MEDIUM">
+<td class="severity"><span class="pill sev-MEDIUM">MEDIUM</span></td>
+<td>virtualenv</td>
+<td>20.35.4</td>
+<td>GHSA-597g-3phw-6986</td>
+<td>20.36.1</td>
+</tr>
+<tr class="row-LOW">
+<td class="severity"><span class="pill sev-LOW">LOW</span></td>
+<td>Pygments</td>
+<td>2.19.2</td>
+<td>GHSA-5239-wwwm-4pmq</td>
+<td>2.20.0</td>
+</tr>
+<tr class="row-LOW">
+<td class="severity"><span class="pill sev-LOW">LOW</span></td>
+<td>flask</td>
+<td>3.1.2</td>
+<td>GHSA-68rp-wp8r-4726</td>
+<td>3.1.3</td>
+</tr>
+<tr class="row-LOW">
+<td class="severity"><span class="pill sev-LOW">LOW</span></td>
+<td>pip</td>
+<td>25.3</td>
+<td>GHSA-6vgw-5pg2-w6jp</td>
+<td>26.0</td>
+</tr>
+</tbody>
+</table><div class="section-rule"></div>
+<h2>Currency Signals</h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Installed</th>
+<th>Latest</th>
+<th>Latest Release</th>
+<th>Cadence (days)</th>
+<th>Signals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PyYAML</td>
+<td>6.0.3</td>
+<td>6.0.3</td>
+<td>2025-09-25T21:31:46Z</td>
+<td>360.8</td>
+<td>slow_release_cadence</td>
+</tr>
+<tr>
+<td>bandit</td>
+<td>1.8.6</td>
+<td>1.9.4</td>
+<td>2026-02-25T06:44:13Z</td>
+<td>58.5</td>
+<td>none</td>
+</tr>
+<tr>
+<td>breathe</td>
+<td>4.36.0</td>
+<td>4.36.0</td>
+<td>2025-02-22T18:36:01Z</td>
+<td>278.5</td>
+<td>slow_release_cadence</td>
+</tr>
+<tr>
+<td>flask</td>
+<td>3.1.2</td>
+<td>3.1.3</td>
+<td>2026-02-19T05:00:56Z</td>
+<td>170.6</td>
+<td>none</td>
+</tr>
+<tr>
+<td>flask-cors</td>
+<td>6.0.1</td>
+<td>6.0.2</td>
+<td>2025-12-12T20:31:41Z</td>
+<td>72.9</td>
+<td>none</td>
+</tr>
+<tr>
+<td>flask-socketio</td>
+<td>5.5.1</td>
+<td>5.6.1</td>
+<td>2026-02-21T13:07:51Z</td>
+<td>127.0</td>
+<td>none</td>
+</tr>
+<tr>
+<td>myst-parser</td>
+<td>4.0.1</td>
+<td>5.0.0</td>
+<td>2026-01-15T09:08:16Z</td>
+<td>157.9</td>
+<td>major_version_lag:1</td>
+</tr>
+<tr>
+<td>openai</td>
+<td>2.6.1</td>
+<td>2.32.0</td>
+<td>2026-04-15T22:28:17Z</td>
+<td>8.3</td>
+<td>none</td>
+</tr>
+<tr>
+<td>pyoslog</td>
+<td>1.2.0</td>
+<td>1.2.0</td>
+<td>2025-05-28T08:32:44Z</td>
+<td>247.2</td>
+<td>slow_release_cadence</td>
+</tr>
+<tr>
+<td>python-dotenv</td>
+<td>1.2.1</td>
+<td>1.2.2</td>
+<td>2026-03-01T16:00:25Z</td>
+<td>85.3</td>
+<td>none</td>
+</tr>
+<tr>
+<td>python-socketio</td>
+<td>5.14.3</td>
+<td>5.16.1</td>
+<td>2026-02-06T23:42:05Z</td>
+<td>25.1</td>
+<td>none</td>
+</tr>
+<tr>
+<td>sphinx</td>
+<td>8.2.3</td>
+<td>9.1.0</td>
+<td>2025-12-31T15:09:25Z</td>
+<td>6.9</td>
+<td>major_version_lag:1</td>
+</tr>
+<tr>
+<td>sphinx-autodoc-typehints</td>
+<td>3.5.2</td>
+<td>3.10.2</td>
+<td>2026-04-15T22:09:47Z</td>
+<td>5.7</td>
+<td>none</td>
+</tr>
+<tr>
+<td>sphinx-rtd-theme</td>
+<td>3.0.2</td>
+<td>3.1.0</td>
+<td>2026-01-12T16:03:28Z</td>
+<td>115.0</td>
+<td>none</td>
+</tr>
+<tr>
+<td>sphinxcontrib-mermaid</td>
+<td>1.0.0</td>
+<td>2.0.1</td>
+<td>2026-03-05T14:10:40Z</td>
+<td>24.9</td>
+<td>major_version_lag:1</td>
+</tr>
+</tbody>
+</table><div class="section-rule"></div>
+<h2>Used-Symbol Summary</h2>
+<ul>
+<li>PyYAML: yaml</li>
+<li>flask: Flask, jsonify, render_template, request, send_from_directory</li>
+<li>flask-cors: CORS</li>
+<li>flask-socketio: SocketIO, emit</li>
+<li>openai: AsyncOpenAI, Response, ResponseInputItemParam, ToolParam</li>
+<li>pyoslog: pyoslog</li>
+<li>pytest: pytest</li>
+<li>python-dotenv: load_dotenv</li>
+</ul>
+<p>Unresolved usage flags:
+- dynamic_import (PyYAML): run_agent.py:64</p><div class="section-rule"></div>
+<h2>Impact Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Upgrade</th>
+<th>Breakage</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pygments</td>
+<td>2.19.2 -&gt; 2.20.0</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>Werkzeug</td>
+<td>3.1.3 -&gt; 3.1.4</td>
+<td>LOW (0.05)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>Werkzeug</td>
+<td>3.1.3 -&gt; 3.1.8</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>black</td>
+<td>25.9.0 -&gt; 26.3.1</td>
+<td>LOW (0.15)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>filelock</td>
+<td>3.20.0 -&gt; 3.20.1</td>
+<td>LOW (0.05)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>filelock</td>
+<td>3.20.0 -&gt; 3.29.0</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>flask</td>
+<td>3.1.2 -&gt; 3.1.3</td>
+<td>NONE (0.02)</td>
+<td>HIGH</td>
+</tr>
+<tr>
+<td>pip</td>
+<td>25.3 -&gt; 26.0</td>
+<td>LOW (0.15)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>pip</td>
+<td>25.3 -&gt; 26.0.1</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>pytest</td>
+<td>8.4.2 -&gt; 9.0.3</td>
+<td>MEDIUM (0.45)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>python-dotenv</td>
+<td>1.2.1 -&gt; 1.2.2</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>requests</td>
+<td>2.32.5 -&gt; 2.33.0</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>requests</td>
+<td>2.32.5 -&gt; 2.33.1</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>urllib3</td>
+<td>2.5.0 -&gt; 2.6.0</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>urllib3</td>
+<td>2.5.0 -&gt; 2.6.3</td>
+<td>LOW (0.12)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>virtualenv</td>
+<td>20.35.4 -&gt; 20.36.1</td>
+<td>LOW (0.15)</td>
+<td>MEDIUM</td>
+</tr>
+<tr>
+<td>virtualenv</td>
+<td>20.35.4 -&gt; 21.2.4</td>
+<td>MEDIUM (0.45)</td>
+<td>MEDIUM</td>
+</tr>
+</tbody>
+</table>
+<div class="impact-analysis">
+<ul>
+<li><div class="item-header">Pygments 2.19.2 → 2.20.0</div><div class="item-body">Release indicates 2.20.0 fixes GHSA-5239 (low severity). Changelog and release notes do not document breaking API removals, and the provided project usage list contains no Pygments symbols, so direct impact on the project is unlikely.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://github.com/pygments/pygments/blob/master/CHANGES)</span></li>
+<li><div class="item-header">Werkzeug 3.1.3 → 3.1.4</div><div class="item-body">Version 3.1.4 is a patch release that fixes GHSA-hgf8-39gv-g3f2 for versions &lt; 3.1.4. It is unlikely to introduce breaking API changes, but other listed vulnerabilities remain fixed only in later versions (3.1.5 and 3.1.6) and are not addressed by this upgrade.</div><span class="item-citation">Citation: metadata_changelog — Changes (https://werkzeug.palletsprojects.com/page/changes/)</span></li>
+<li><div class="item-header">Werkzeug 3.1.3 → 3.1.8</div><div class="item-body">CVE records show fixes introduced in 3.1.4–3.1.6 and the candidate (3.1.8) is patch-level; release notes and CVE descriptions indicate security hardenings to URL and header handling rather than public API removals, so breaking risk is low but behavioral changes may affect edge-case inputs.</div><span class="item-citation">Citation: metadata_changelog — Changes (https://werkzeug.palletsprojects.com/page/changes/)</span></li>
+<li><div class="item-header">black 25.9.0 → 26.3.1</div><div class="item-body">The GHSA-3936-cmfr-pm3m vulnerability is fixed in 26.3.1; the project shows no detected imports/usages of black so upgrading primarily affects developer tooling/CI rather than runtime application code. Major-version upgrades can include CLI, configuration, or API signature changes, so validate CI and any programmatic calls to black after updating.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://github.com/psf/black/blob/main/CHANGES.md)</span></li>
+<li><div class="item-header">filelock 3.20.0 → 3.20.1</div><div class="item-body">3.20.1 is a patch release that addresses GHSA-w853-jp5j-5j7f (medium); the other reported issue (GHSA-qmgc-5h2g-mvrw) is fixed in 3.20.3 and remains unaddressed by 3.20.1. With no release notes or observed API usage, the upgrade is likely low-risk but not fully verifiable.</div></li>
+<li><div class="item-header">filelock 3.20.0 → 3.29.0</div><div class="item-body">The CVE records show fixes introduced in 3.20.1 and 3.20.3, indicating these were security patches within the 3.20 series; moving to 3.29.0 is a minor-version upgrade and is unlikely to remove or widely change existing public APIs, and no project symbols were reported as used.</div></li>
+<li><div class="item-header">flask 3.1.2 → 3.1.3</div><div class="item-body">GHSA-68rp-wp8r-4726 (LOW) is fixed in 3.1.3. The release is a patch-level update with no documented API removals or signature changes affecting common symbols (Flask, jsonify, render_template, send_from_directory, request), so upgrading should be safe.</div><span class="item-citation">Citation: metadata_changelog — Changes (https://flask.palletsprojects.com/page/changes/)</span></li>
+<li><div class="item-header">pip 25.3 → 26.0</div><div class="item-body">pip is primarily a command-line installer rather than a stable importable library; the upgrade from 25.3 to 26.0 is a major bump and the changelog notes changes in 26.x, and one CVE (GHSA-6vgw-5pg2-w6jp) is fixed in 26.0 while another GHSA record has no fixed version listed, indicating security motivation for the upgrade.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://pip.pypa.io/en/stable/news/)</span></li>
+<li><div class="item-header">pip 25.3 → 26.0.1</div><div class="item-body">pip 26.0.x changelog indicates fixes for the reported GHSA advisory and other bug/security fixes; major-version upgrades commonly change internal APIs and CLI behaviour, but since the project does not import pip, runtime breakage risk is low. Upgrading mitigates the listed CVE (GHSA-6vgw-5pg2-w6jp fixed in 26.0) while demanding caution if any CI/tools parse pip output or rely on pip._internal.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://pip.pypa.io/en/stable/news/)</span></li>
+<li><div class="item-header">pytest 8.4.2 → 9.0.3</div><div class="item-body">This is a major-version upgrade; the changelog and release notes for 9.0.3 indicate breaking changes and removals in plugin and config internals. The security advisory (GHSA-6w46-j5rx-g56g) is fixed in 9.0.3, so upgrading removes the reported vulnerability.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://docs.pytest.org/en/stable/changelog.html)</span></li>
+<li><div class="item-header">python-dotenv 1.2.1 → 1.2.2</div><div class="item-body">CVE GHSA-mf9w-mj56-hr94 is fixed in 1.2.2 (affects &lt;1.2.2), indicating a security fix. Because this is a patch bump, API signatures are unlikely to change, but parsing/validation behaviour that affects load_dotenv may be hardened, creating low risk of minor behavioral differences.</div></li>
+<li><div class="item-header">requests 2.32.5 → 2.33.0</div><div class="item-body">The candidate 2.33.0 is a minor bump that fixes GHSA-gc5v-m9x4-r6x2; there is no available release evidence of API removals or signature changes, and Requests typically avoids breaking changes in minor releases.</div></li>
+<li><div class="item-header">requests 2.32.5 → 2.33.1</div><div class="item-body">GHSA-gc5v-m9x4-r6x2 is fixed in 2.33.0, so upgrading to 2.33.1 resolves that vulnerability. No project usage symbols were supplied and no changelog evidence was provided, so the assessment assumes a low-risk minor release focused on security/bug fixes.</div></li>
+<li><div class="item-header">urllib3 2.5.0 → 2.6.0</div><div class="item-body">Upgrading from 2.5.0 to 2.6.0 patches GHSA-2xpw-w6gg-jr37 and GHSA-gm62-xv2j-4w53 but does not fix GHSA-38jv-5279-wg99 (which is fixed in 2.6.3). The bump is a minor release, so breaking API changes are unlikely for typical usage, and the project provided no symbol usage indicating direct exposure.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://github.com/urllib3/urllib3/blob/main/CHANGES.rst)</span></li>
+<li><div class="item-header">urllib3 2.5.0 → 2.6.3</div><div class="item-body">Upgrade from 2.5.0 to 2.6.3 includes fixes for multiple HIGH-severity advisories (fixed in 2.6.0 and 2.6.3). This is a minor-version bump within 2.x, so breaking API changes are unlikely, but project-specific usage wasn't supplied so residual risk remains.</div><span class="item-citation">Citation: metadata_changelog — Changelog (https://github.com/urllib3/urllib3/blob/main/CHANGES.rst)</span></li>
+<li><div class="item-header">virtualenv 20.35.4 → 20.36.1</div><div class="item-body">The CVE GHSA-597g-3phw-6986 is fixed in 20.36.1 and the upgrade is a minor bump within the 20.x series, implying limited API change risk. The project reports no used symbols from virtualenv, so direct breakage risk to this codebase is unlikely.</div></li>
+<li><div class="item-header">virtualenv 20.35.4 → 21.2.4</div><div class="item-body">The upgrade is a major-version jump (20.35.4 → 21.2.4) and the security fix referenced applies to &lt;20.36.1, so the candidate includes the fix. Major releases of virtualenv frequently reorganize APIs and seeding behaviour, so there is a moderate risk of breakage for projects that call virtualenv programmatically.</div></li>
+</ul>
+</div>
+<div class="section-rule"></div>
+<h2>Dependency Graph</h2>
+<p>Cached edges: 15</p>
+<ul>
+<li>Staff -&gt; PyYAML</li>
+<li>Staff -&gt; bandit</li>
+<li>Staff -&gt; breathe</li>
+<li>Staff -&gt; flask</li>
+<li>Staff -&gt; flask-cors</li>
+<li>Staff -&gt; flask-socketio</li>
+<li>Staff -&gt; myst-parser</li>
+<li>Staff -&gt; openai</li>
+<li>Staff -&gt; pyoslog</li>
+<li>Staff -&gt; python-dotenv</li>
+<li>Staff -&gt; python-socketio</li>
+<li>Staff -&gt; sphinx</li>
+<li>Staff -&gt; sphinx-autodoc-typehints</li>
+<li>Staff -&gt; sphinx-rtd-theme</li>
+<li>Staff -&gt; sphinxcontrib-mermaid</li>
+</ul><div class="section-rule"></div>
+<h2>Ranked Remediation Paths</h2>
+<div class="path"><div class="path-header"><h3 class="path-title">Balanced</h3><div class="path-scores"><span class="score-label">Exposure</span><span class="score-value">0.08</span><span class="score-label">Breakage</span><span class="score-value">0.15</span><span class="score-label">Confidence</span><span class="score-value">MEDIUM</span></div></div>
+<p>This path balances exposure reduction and low breakage by applying low-to-moderate-risk upgrades that remove most medium/high CVEs while avoiding high-probable-breakage upgrades like pytest or a major pip bump. The maximum breakage score reflects minor/patch updates plus a few safe minor upgrades (virtualenv, black) and stays moderate. Remaining unresolved items include the pip CVE with no fix and pytest's major upgrade; address these in a separate, well-tested change window. For the no-fix pip CVE, mitigate via restricted pip usage, isolated build environments, or replacing automated pip operations where feasible.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>From</th>
+<th>To</th>
+<th>Fixes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>python-dotenv</td>
+<td>1.2.1</td>
+<td>1.2.2</td>
+<td>GHSA-mf9w-mj56-hr94</td>
+</tr>
+<tr>
+<td>flask</td>
+<td>3.1.2</td>
+<td>3.1.3</td>
+<td>GHSA-68rp-wp8r-4726</td>
+</tr>
+<tr>
+<td>requests</td>
+<td>2.32.5</td>
+<td>2.33.0</td>
+<td>GHSA-gc5v-m9x4-r6x2</td>
+</tr>
+<tr>
+<td>urllib3</td>
+<td>2.5.0</td>
+<td>2.6.3</td>
+<td>GHSA-2xpw-w6gg-jr37, GHSA-38jv-5279-wg99, GHSA-gm62-xv2j-4w53</td>
+</tr>
+<tr>
+<td>black</td>
+<td>25.9.0</td>
+<td>26.3.1</td>
+<td>GHSA-3936-cmfr-pm3m</td>
+</tr>
+<tr>
+<td>Werkzeug</td>
+<td>3.1.3</td>
+<td>3.1.8</td>
+<td>GHSA-29vq-49wr-vm6x, GHSA-87hc-h4r5-73f7, GHSA-hgf8-39gv-g3f2</td>
+</tr>
+<tr>
+<td>Pygments</td>
+<td>2.19.2</td>
+<td>2.20.0</td>
+<td>GHSA-5239-wwwm-4pmq</td>
+</tr>
+<tr>
+<td>filelock</td>
+<td>3.20.0</td>
+<td>3.29.0</td>
+<td>GHSA-qmgc-5h2g-mvrw, GHSA-w853-jp5j-5j7f</td>
+</tr>
+<tr>
+<td>virtualenv</td>
+<td>20.35.4</td>
+<td>20.36.1</td>
+<td>GHSA-597g-3phw-6986</td>
+</tr>
+</tbody>
+</table>
+
+<div class="nofix"><span class="label">No Fix Available</span>GHSA-58qw-9mgm-455v
+Open: GHSA-6vgw-5pg2-w6jp, GHSA-6w46-j5rx-g56g</div></div><div class="path"><div class="path-header"><h3 class="path-title">Maximum Coverage</h3><div class="path-scores"><span class="score-label">Exposure</span><span class="score-value">0.038</span><span class="score-label">Breakage</span><span class="score-value">0.45</span><span class="score-label">Confidence</span><span class="score-value">MEDIUM</span></div></div>
+<p>This path upgrades every package for which a candidate fix is available, maximizing CVE coverage across the project. It includes several major/minor updates (e.g., pytest, pip) that increase the probable breakage score, so extensive testing and staged rollout are required. Use CI and canary/staging environments to validate behavior before production deployment. For the pip CVE with no upstream fix (GHSA-58qw-9mgm-455v) continue isolating packaging operations and consider restricting pip usage in runtime environments.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>From</th>
+<th>To</th>
+<th>Fixes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>python-dotenv</td>
+<td>1.2.1</td>
+<td>1.2.2</td>
+<td>GHSA-mf9w-mj56-hr94</td>
+</tr>
+<tr>
+<td>flask</td>
+<td>3.1.2</td>
+<td>3.1.3</td>
+<td>GHSA-68rp-wp8r-4726</td>
+</tr>
+<tr>
+<td>requests</td>
+<td>2.32.5</td>
+<td>2.33.0</td>
+<td>GHSA-gc5v-m9x4-r6x2</td>
+</tr>
+<tr>
+<td>urllib3</td>
+<td>2.5.0</td>
+<td>2.6.3</td>
+<td>GHSA-2xpw-w6gg-jr37, GHSA-38jv-5279-wg99, GHSA-gm62-xv2j-4w53</td>
+</tr>
+<tr>
+<td>pip</td>
+<td>25.3</td>
+<td>26.0</td>
+<td>GHSA-6vgw-5pg2-w6jp</td>
+</tr>
+<tr>
+<td>black</td>
+<td>25.9.0</td>
+<td>26.3.1</td>
+<td>GHSA-3936-cmfr-pm3m</td>
+</tr>
+<tr>
+<td>Werkzeug</td>
+<td>3.1.3</td>
+<td>3.1.8</td>
+<td>GHSA-29vq-49wr-vm6x, GHSA-87hc-h4r5-73f7, GHSA-hgf8-39gv-g3f2</td>
+</tr>
+<tr>
+<td>pytest</td>
+<td>8.4.2</td>
+<td>9.0.3</td>
+<td>GHSA-6w46-j5rx-g56g</td>
+</tr>
+<tr>
+<td>Pygments</td>
+<td>2.19.2</td>
+<td>2.20.0</td>
+<td>GHSA-5239-wwwm-4pmq</td>
+</tr>
+<tr>
+<td>filelock</td>
+<td>3.20.0</td>
+<td>3.29.0</td>
+<td>GHSA-qmgc-5h2g-mvrw, GHSA-w853-jp5j-5j7f</td>
+</tr>
+<tr>
+<td>virtualenv</td>
+<td>20.35.4</td>
+<td>20.36.1</td>
+<td>GHSA-597g-3phw-6986</td>
+</tr>
+</tbody>
+</table>
+
+<div class="nofix"><span class="label">No Fix Available</span>GHSA-58qw-9mgm-455v</div></div><div class="path"><div class="path-header"><h3 class="path-title">Minimum Breakage</h3><div class="path-scores"><span class="score-label">Exposure</span><span class="score-value">0.392</span><span class="score-label">Breakage</span><span class="score-value">0.15</span><span class="score-label">Confidence</span><span class="score-value">MEDIUM</span></div></div>
+<p>This path applies the smallest set of upgrades that address the highest-severity issues (urllib3's three HIGH CVEs and black's HIGH CVE) while keeping upgrade scope low. It avoids major-version changes like pytest or pip that have higher probable breakage. Remaining medium/low CVEs can be scheduled for a follow-up sweep after testing. For the pip CVE with no upstream fix (GHSA-58qw-9mgm-455v) add runtime mitigations (restrict pip operations, isolate build environments) until a fix is available.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>From</th>
+<th>To</th>
+<th>Fixes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>urllib3</td>
+<td>2.5.0</td>
+<td>2.6.3</td>
+<td>GHSA-2xpw-w6gg-jr37, GHSA-38jv-5279-wg99, GHSA-gm62-xv2j-4w53</td>
+</tr>
+<tr>
+<td>black</td>
+<td>25.9.0</td>
+<td>26.3.1</td>
+<td>GHSA-3936-cmfr-pm3m</td>
+</tr>
+</tbody>
+</table>
+
+<div class="nofix"><span class="label">No Fix Available</span>GHSA-58qw-9mgm-455v
+Open: GHSA-29vq-49wr-vm6x, GHSA-5239-wwwm-4pmq, GHSA-597g-3phw-6986, GHSA-68rp-wp8r-4726, GHSA-6vgw-5pg2-w6jp, GHSA-6w46-j5rx-g56g, GHSA-87hc-h4r5-73f7, GHSA-gc5v-m9x4-r6x2, GHSA-hgf8-39gv-g3f2, GHSA-mf9w-mj56-hr94, GHSA-qmgc-5h2g-mvrw, GHSA-w853-jp5j-5j7f</div>
+</div>
+<br>
+<div class="limitations"><h2>Limitations and Confidence Notes</h2>
+<ul>
+<li>Cached reports reflect the data available when the run was recorded.</li>
+<li>Missing usage, unresolved usage, missing changelog evidence, and LLM fallback paths lower confidence.</li>
+</ul></div>
+</main>
+</body>
+</html>

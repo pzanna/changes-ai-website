@@ -275,6 +275,24 @@ section {
 }
 .t-blue   { color: rgba(255,255,255,0.38); }
 
+.report-link {
+  margin-top: 28px;
+  text-align: right;
+}
+
+.report-link a {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #e8351a;
+  text-decoration: none;
+}
+
+.report-link a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ── MERMAID RENDERED ── */
 .chart-rendered {
   margin-top: 20px;
