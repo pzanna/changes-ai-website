@@ -289,20 +289,23 @@ section {
 }
 .t-blue   { color: rgba(255,255,255,0.38); }
 
-.report-link {
+.report-links {
   margin-top: 28px;
-  text-align: right;
+  margin-bottom: -28px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.report-link a {
-  font-size: 12px;
+.report-links a {
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #e8351a;
   text-decoration: none;
 }
 
-.report-link a:hover {
+.report-links a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
